@@ -18,4 +18,5 @@ import org.springframework.stereotype.Repository;
 public interface RoleRepository extends CrudRepository<Role, Integer>{
     @Query(value = "SELECT * FROM role WHERE role.status_role = 1", nativeQuery = true)
     public Iterable<Role> getRoleActive();
+//    public Iterable<Role> getAll();
 }

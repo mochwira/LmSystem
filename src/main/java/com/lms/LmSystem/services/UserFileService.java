@@ -32,19 +32,19 @@ public class UserFileService implements UserFile {
 
             // Creating header cells
             Cell cell = row.createCell(0);
-            cell.setCellValue("Nama");
+            cell.setCellValue("User Name");
             cell.setCellStyle(headerCellStyle);
 
             cell = row.createCell(1);
-            cell.setCellValue("Email");
+            cell.setCellValue("Name");
             cell.setCellStyle(headerCellStyle);
 
             cell = row.createCell(2);
-            cell.setCellValue("Tanggal Lahir");
+            cell.setCellValue("Email");
             cell.setCellStyle(headerCellStyle);
 
             cell = row.createCell(3);
-            cell.setCellValue("Gender");
+            cell.setCellValue("Password");
             cell.setCellStyle(headerCellStyle);
 
             cell = row.createCell(3);
@@ -57,10 +57,10 @@ public class UserFileService implements UserFile {
             for(int i = 0; i < users.size(); i++) {
                 Row dataRow = sheet.createRow(i + 1);
                 dataRow.createCell(0).setCellValue(users.get(i).getNamaUser());
-                dataRow.createCell(1).setCellValue(users.get(i).getEmail());
-                dataRow.createCell(2).setCellValue(users.get(i).getTanggalLahir());
-                dataRow.createCell(3).setCellValue(users.get(i).getGender());
-                dataRow.createCell(3).setCellValue(users.get(i).getRoleId().getNamaRole());
+                dataRow.createCell(1).setCellValue(users.get(i).getNamaUser());
+                dataRow.createCell(2).setCellValue(users.get(i).getEmail());
+                dataRow.createCell(3).setCellValue(users.get(i).getPassword());
+                dataRow.createCell(4).setCellValue(users.get(i).getRoleId().getNamaRole());
             }
 
             // Making size of column auto resize to fit with data

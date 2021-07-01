@@ -1,0 +1,57 @@
+<form th:fragment="form">
+    <div class="modal fade" id="editUser" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 class="modal-title"><span class="fa fa-plus-circle"></span> Edit User</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Id User<span class="redColor">*</span></label>
+                        <div class="form-line">                        
+                            <input type="text" th:field="*{userId}" class="userIdEdit form-control" placeholder="" required>
+                        </div>
+                        
+                         <label>Nama Provinsi<span class="redColor">*</span></label>
+                        <select th:field="*{roleId}" class="roleIdEdit form-control" required>
+                            <option value="">Pilih</option>
+                            <option 
+                                th:each="role : ${roler}"
+                                th:value="${role.roleId}"
+                                th:text="${role.namaRole}">
+                            </option>
+                        </select>
+
+                        <label>Username<span class="redColor">*</span></label>
+                        <div class="form-line">
+                            <input type="text" th:field="*{username}" class="usernameEdit form-control" placeholder="" required>
+                        </div>
+
+                        <label>Name User<span class="redColor">*</span></label>
+                        <div class="form-line">
+                            <input type="text" th:field="*{namaUser}" class="namaUserEdit form-control" placeholder="" required>
+                        </div>
+
+                        <label>Email<span class="redColor">*</span></label>
+                        <div class="form-line">
+                            <input type="text" th:field="*{email}" class="emailEdit form-control" placeholder="" required>
+                        </div>
+
+                        <label>Password<span class="redColor">*</span></label>
+                        <div class="form-line">
+                            <input type="text" th:field="*{password}" class="passwordEdit form-control" placeholder="" required>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" id="add-row" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

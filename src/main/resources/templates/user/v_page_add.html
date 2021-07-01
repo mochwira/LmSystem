@@ -1,0 +1,84 @@
+<form th:fragment="form">
+    <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 class="modal-title"><span class="fa fa-plus-circle"></span>Add User</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <!--                        <label>Nama Provinsi<span class="redColor">*</span></label>
+                                                <div class="form-line">                  
+                                                    <select class="form-control">
+                                                        <option name="idProvinsi.namaProvinsi"></option>                                
+                                                    </select> 
+                                                </div>-->
+<!--                        <select id="idProvinsi" name="idProvinsi" class="form-control" required onchange="changeRoleUser('add')">
+                            <option>-</option>
+                            
+                            <option th:each="provinsi : ${provinsi}" 
+                                    th:value="${provinsi.idProvinsi}" 
+                                    th:text="${provinsi.namaProvinsi}"></option>
+                        </select>-->
+                        </br>
+                        <label>UserId<span class="redColor">*</span></label>
+                        <div class="form-line">
+                            <input type="text" name="userId" class="form-control" placeholder="" required>
+                        </div>
+                        </br>
+
+                        </br>
+                       <label>Nama Role<span class="redColor">*</span></label>
+                        <select th:field="*{roleId}" class="form-control" required>
+                            <option value="">Pilih</option>
+                            <option 
+                                th:each="role : ${roler}"
+                                th:value="${role.roleId}"
+                                th:text="${role.namaRole}">
+                            </option>
+                        </select>
+                        </br>
+
+                        </br>
+                        <label>Username<span class="redColor">*</span></label>
+                        <div class="form-line">
+                            <input type="text" name="username" class="form-control" placeholder="" required>
+                        </div>
+                        </br>
+
+                        </br>
+                        <label>Nama User<span class="redColor">*</span></label>
+                        <div class="form-line">
+                            <input type="text" name="namaUser" class="form-control" placeholder="" required>
+                        </div>
+                        </br>
+
+                        </br>
+                        <label>Email<span class="redColor">*</span></label>
+                        <div class="form-line">
+                            <input type="text" name="email" class="form-control" placeholder="" required>
+                        </div>
+                        </br>
+
+                        </br>
+                        <label>Password<span class="redColor">*</span></label>
+                        <div class="form-line">
+                            <input type="text" name="password" class="form-control" placeholder="" required>
+                        </div>
+                        </br>
+
+
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" id="add-row" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

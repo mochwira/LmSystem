@@ -6,7 +6,6 @@
 package com.lms.LmSystem.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -17,14 +16,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -41,9 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
     @NamedQuery(name = "User.findByNamaUser", query = "SELECT u FROM User u WHERE u.namaUser = :namaUser"),
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
-    @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
-    @NamedQuery(name = "User.findByTanggalLahir", query = "SELECT u FROM User u WHERE u.tanggalLahir = :tanggalLahir"),
-    @NamedQuery(name = "User.findByGender", query = "SELECT u FROM User u WHERE u.gender = :gender")})
+    @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,29 +46,14 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "user_id")
     private Integer userId;
-    @Basic(optional = false)
     @Column(name = "username")
     private String username;
-    @Basic(optional = false)
     @Column(name = "nama_user")
     private String namaUser;
-    @Basic(optional = false)
     @Column(name = "email")
     private String email;
-    @Basic(optional = false)
     @Column(name = "password")
     private String password;
-    @Basic(optional = false)
-    @Column(name = "tanggal_lahir")
-    @Temporal(TemporalType.DATE)
-    private Date tanggalLahir;
-    @Basic(optional = false)
-    @Column(name = "gender")
-    private String gender;
-    @Basic(optional = false)
-    @Lob
-    @Column(name = "foto_profil")
-    private byte[] fotoProfil;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId", fetch = FetchType.LAZY)
     private List<Artikel> artikelList;
     @JoinColumn(name = "role_id", referencedColumnName = "role_id")
@@ -86,17 +65,6 @@ public class User implements Serializable {
 
     public User(Integer userId) {
         this.userId = userId;
-    }
-
-    public User(Integer userId, String username, String namaUser, String email, String password, Date tanggalLahir, String gender, byte[] fotoProfil) {
-        this.userId = userId;
-        this.username = username;
-        this.namaUser = namaUser;
-        this.email = email;
-        this.password = password;
-        this.tanggalLahir = tanggalLahir;
-        this.gender = gender;
-        this.fotoProfil = fotoProfil;
     }
 
     public Integer getUserId() {
@@ -137,30 +105,6 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Date getTanggalLahir() {
-        return tanggalLahir;
-    }
-
-    public void setTanggalLahir(Date tanggalLahir) {
-        this.tanggalLahir = tanggalLahir;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public byte[] getFotoProfil() {
-        return fotoProfil;
-    }
-
-    public void setFotoProfil(byte[] fotoProfil) {
-        this.fotoProfil = fotoProfil;
     }
 
     @XmlTransient

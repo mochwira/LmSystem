@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>User Management</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Image -->
+    <link rel="icon" th:href="@{/img/menu.png}"/>
+
+
+    <!--Online-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<!--    <script src="/js/datatable.js"></script>-->
+
+    <link rel="stylesheet" th:href="@{/css/stylesidebar.css}"/>
+    <script th:src="@{/js/user.js}"></script>
+</head>
+<body>
+<div class="wrapper">
+    <div th:insert="fragment/sidebar.html :: sidebar"></div>
+
+    <div id="content" class="col">
+        <div th:insert="fragment/navheader.html :: navheader"></div>
+
+        <div class="container">
+            <div class="container">
+                <button class="btn btn-primary nBtn">New</button>
+                <table class="table table-hover">
+                    <thead class="bg-dark text-white">
+                    <tr>
+                        <td>Id User</td>
+                        <td>Role Name</td>
+                        <td>User Name</td>
+                        <td>Name</td>
+                        <td>Email</td>
+                        <td>Tanggal Lahir</td>
+                        <td>Gender</td>
+                        <td>Action</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="u : ${users}">
+
+                        <td th:text="${u.userId}"></td>
+                        <td th:text="${u.roleId.namaRole}"></td>
+                        <td th:text="${u.username}"></td>
+                        <td th:text="${u.namaUser}"></td>
+                        <td th:text="${u.email}"></td>
+                        <td th:text="${u.tanggalLahir}"></td>
+                        <td th:text="${u.gender}"></td>
+                        <td>
+                            <a class="btn btn-primary text-white eBtn"
+                               th:href="@{http://localhost:8082/finduser/(userId=${u.userId})}">Edit</a>
+                            <!--                delete id kayanya jadi delete KategoriId-->
+                            <a class="btn btn-danger text-white rBtn" th:href="${'/deleteuser?userId='+u.userId}">Remove</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <ul class="nav nav-pills">
+                    <li class="nav-item" th:each="i : ${#numbers.sequence(0, users.totalPages-1)}">
+                        <a th:href="${'?page='+i}" th:text="${i}" class="nav-link"
+                           th:classappend="${buatPageUser}==${i}?'active':''"></a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Modal Edit n New-->
+            <div class="myForm">
+                <form th:action="@{/saveuser}" method="post" th:object="${buatUser}">
+                    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true"
+                         id="userModal">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="userModalLabel">Save or Update</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="text" class="form-control" id="userId" name="userId" value="" th:field="*{userId}">
+
+                                    <!--                        <select th:field="*{countries}">-->
+                                    <!--                            <option th:each="country: ${countries}"-->
+                                    <!--                                    th:value="${country.id}"-->
+                                    <!--                                    th:text="#{${'selected.label.' + country.name}}"/>-->
+                                    <!--                        </select>-->
+
+                                    <select th:field="*{roleId}" class="form-control" required>
+                                        <option value="">Pilih</option>
+                                        <option
+                                                th:each="ro : ${roler}"
+                                                th:value="${ro.roleId}"
+                                                th:text="${ro.namaRole}"
+                                                >
+                                        </option>
+                                    </select>
+
+                                    <div class="form-group">
+                                        <label for="username" class=" label">Username</label>
+                                        <input type="text" class="form-control" id="username" name="username" value="" th:field="*{username}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="namaUser" class=" label">Nama</label>
+                                        <input type="text" class="form-control" id="namaUser" name="namaUser" value="" th:field="*{namaUser}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email" class=" label">Email</label>
+                                        <input type="text" class="form-control" id="email" name="email" value="" th:field="*{email}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tanggalLahir" class=" label">Tanggal Lahir</label>
+                                        <input type="text" class="form-control" id="tanggalLahir" name="tanggalLahir" value="" th:field="*{tanggalLahir}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="gender" class=" label">Gender</label>
+                                        <input type="text" class="form-control" id="gender" name="gender" value="" th:field="*{gender}">
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal Edit n Remove di ganti My Remove-->
+            <div class="myRemoveUser">
+                <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true"
+                     id="userModal">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="userModalLabel">Save or Update</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="alert-danger text-dark p-2">Apakah anda yakin ?</div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <a class="btn btn-danger dBtn" href="">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+</html>

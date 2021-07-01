@@ -133,13 +133,13 @@ ul.CTAs a {
   margin-bottom: 5px;
 }
 
-a.download {
+a.help {
   background: #fff;
   color: #7386d5;
 }
 
-a.article,
-a.article:hover {
+a.setting,
+a.setting:hover {
   background: #6d7fcc !important;
   color: #fff !important;
 }

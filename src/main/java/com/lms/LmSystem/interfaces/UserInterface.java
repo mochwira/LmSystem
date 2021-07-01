@@ -12,6 +12,9 @@ import com.lms.LmSystem.entity.User;
  * @author mocha
  */
 public interface UserInterface {
+    void save(User user);
+    Iterable<User> getAll();
+
     User getEmail(String email);
     User getPassword(String password);
 }

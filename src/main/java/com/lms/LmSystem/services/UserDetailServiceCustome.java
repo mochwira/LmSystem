@@ -41,6 +41,7 @@ public class UserDetailServiceCustome implements UserDetailsService{
                     
         String emails = user.getEmail();
         System.out.println("email " + emails);
+        //getpasswords
         String password = user.getPassword();
          System.out.println("password " +password);
         Integer roleid = user.getRoleId().getRoleId();

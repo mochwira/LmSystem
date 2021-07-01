@@ -14,6 +14,7 @@ import java.util.Optional;
  */
 public interface RoleInterface {
     void save(Role role);
+    Iterable<Role> getAll();
     Iterable<Role> getRoleActive();
     public Optional<Role> getRoleById(Integer roleId);
 }

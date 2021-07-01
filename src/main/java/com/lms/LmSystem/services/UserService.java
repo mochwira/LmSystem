@@ -17,9 +17,19 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserService implements UserInterface{
-    
+
     @Autowired
     private UserRepository userRepository;
+
+    @Override
+    public void save(User user) {
+        userRepository.save(user);
+    }
+
+    @Override
+    public Iterable<User> getAll() {
+        return userRepository.findAll();
+    }
 
     @Override
     public User getEmail(String email) {
@@ -30,5 +40,5 @@ public class UserService implements UserInterface{
     public User getPassword(String password) {
         return userRepository.getPassword(password);
    }
-    
+
 }

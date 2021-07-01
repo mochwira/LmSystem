@@ -29,51 +29,33 @@
 
         <ul class="list-unstyled components">
           <p>Welcome People</p>
-          <li class="active">
-            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-            <ul class="collapse list-unstyled" id="homeSubmenu">
-              <li>
-                <a href="#">Home 1</a>
-              </li>
-              <li>
-                <a href="#">Home 2</a>
-              </li>
-              <li>
-                <a href="#">Home 3</a>
-              </li>
-            </ul>
+          <li>
+            <a th:href="@{/home}" >Dashboard</a>
           </li>
           <li>
-            <a href="#">About</a>
+            <a th:href="@{/user}">User</a>
           </li>
           <li>
-            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-            <ul class="collapse list-unstyled" id="pageSubmenu">
-              <li>
-                <a href="#">Page 1</a>
-              </li>
-              <li>
-                <a href="#">Page 2</a>
-              </li>
-              <li>
-                <a href="#">Page 3</a>
-              </li>
-            </ul>
+            <a th:href="@{/role}">Role</a>
+          </li>
+
+          <li>
+            <a th:href="@{/kategori}">Kategori</a>
           </li>
           <li>
-            <a href="#">Portfolio</a>
+            <a th:href="@{/file}">Report</a>
           </li>
           <li>
-            <a href="#">Contact</a>
+            <a href="#">Status</a>
           </li>
         </ul>
 
         <ul class="list-unstyled CTAs">
           <li>
-            <a href="" class="download">My Acount</a>
+            <a href="" class="help">Help</a>
           </li>
           <li>
-            <a href="" class="article">Settings</a>
+            <a href="" class="setting">Settings</a>
           </li>
         </ul>
       </nav>

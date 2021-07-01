@@ -28,6 +28,11 @@ public class RoleService implements RoleInterface{
     }
 
     @Override
+    public Iterable<Role> getAll() {
+        return roleRepository.findAll();
+    }
+
+    @Override
     public Iterable<Role> getRoleActive() {
         return roleRepository.getRoleActive();
     }
