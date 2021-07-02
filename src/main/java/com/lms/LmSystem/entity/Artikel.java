@@ -74,20 +74,21 @@ public class Artikel implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "artikelId", fetch = FetchType.LAZY)
     private List<ArtikelApproval> artikelApprovalList;
 
-    public Artikel() {
+    public Artikel(Integer artikelId, Object kategoriIdObject, String namaArtikel, String deskripsiArtikel, Date lastUpdate) {
     }
 
-    public Artikel(Integer artikelId) {
+    public Artikel() {
         this.artikelId = artikelId;
     }
 
-    public Artikel(Integer artikelId, String namaArtikel, String deskripsiArtkel, byte[] gambarArtikel, Date lastUpdate) {
+    public Artikel(Object namaArtikel, String deskripsiArtkel, String gambarArtikel, String lastUpdate) {
         this.artikelId = artikelId;
         this.namaArtikel = namaArtikel;
         this.deskripsiArtkel = deskripsiArtkel;
         this.gambarArtikel = gambarArtikel;
         this.lastUpdate = lastUpdate;
     }
+
 
     public Integer getArtikelId() {
         return artikelId;
@@ -141,7 +142,7 @@ public class Artikel implements Serializable {
         return kategoriId;
     }
 
-    public void setKategoriId(Kategori kategoriId) {
+    public void setKategoriId(String kategoriId) {
         this.kategoriId = kategoriId;
     }
 

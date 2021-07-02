@@ -2,7 +2,7 @@ package com.lms.LmSystem.controller;
 
 import com.lms.LmSystem.entity.ApprovalStatus;
 
-import com.lms.LmSystem.repository.ApprovalStatusRepository;
+import com.lms.LmSystem.repository.ApprovalStatusRepositoryJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ApprovalStatusRestController {
 
     @Autowired
-    private ApprovalStatusRepository approvalStatusRepository;
+    private ApprovalStatusRepositoryJpa approvalStatusRepository;
 
     @GetMapping("/findapproval")
     public ApprovalStatus createFindApproval(@RequestParam("approvalStatusId") Integer approvalStatusId) {

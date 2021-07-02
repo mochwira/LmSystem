@@ -1,8 +1,7 @@
 package com.lms.LmSystem.controller;
 
 import com.lms.LmSystem.entity.ApprovalStatus;
-import com.lms.LmSystem.entity.Role;
-import com.lms.LmSystem.repository.ApprovalStatusRepository;
+import com.lms.LmSystem.repository.ApprovalStatusRepositoryJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ApprovalStatusController {
 
     @Autowired
-    private ApprovalStatusRepository approvalStatusRepository;
+    private ApprovalStatusRepositoryJpa approvalStatusRepository;
 
     @GetMapping("/approval")
     public String createIndexApproval(Model model, @RequestParam(defaultValue = "0", name = "page") int page) {

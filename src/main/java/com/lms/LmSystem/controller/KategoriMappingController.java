@@ -1,7 +1,7 @@
 package com.lms.LmSystem.controller;
 
 import com.lms.LmSystem.entity.Kategori;
-import com.lms.LmSystem.repository.KategoriRepository;
+import com.lms.LmSystem.repository.KategoriRepositoryJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class KategoriMappingController {
 
     @Autowired
-    private KategoriRepository kategoriRepository;
+    private KategoriRepositoryJpa kategoriRepositoryJpa;
 
     @GetMapping("/kategori")
     public String createIndex(Model model, @RequestParam(defaultValue = "0", name = "page") int page) {
-        //model.addAttribute("kategoris", kategoriRepository.findAll(new PageRequest(page, 4)));
-        model.addAttribute("kategoris", kategoriRepository.findAll(PageRequest.of(page, 8)));
+        //model.addAttribute("kategoris", kategoriRepositoryJpa.findAll(new PageRequest(page, 4)));
+        model.addAttribute("kategoris", kategoriRepositoryJpa.findAll(PageRequest.of(page, 8)));
         model.addAttribute("buatPageKategori", page);
         model.addAttribute("buatKategori", new Kategori());
         return "/kategori/kategori.html";
@@ -27,14 +27,14 @@ public class KategoriMappingController {
 
     @PostMapping("/save")
     public String save(Kategori kategori) {
-        kategoriRepository.save(kategori);
+        kategoriRepositoryJpa.save(kategori);
 
         return "redirect:/kategori";
     }
 
     @GetMapping("/delete")
     public String deleteKategori(@RequestParam("kategoriId") int kategoriId) {
-        kategoriRepository.deleteById(kategoriId);
+        kategoriRepositoryJpa.deleteById(kategoriId);
 
         return "redirect:/kategori";
     }
