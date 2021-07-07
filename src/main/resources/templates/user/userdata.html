@@ -24,7 +24,7 @@
 <!--    <script src="/js/datatable.js"></script>-->
 
     <link rel="stylesheet" th:href="@{/css/stylesidebar.css}"/>
-    <script th:src="@{/js/user.js}"></script>
+    <script th:src="@{/js/usercrud.js}"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -44,8 +44,6 @@
                         <td>User Name</td>
                         <td>Name</td>
                         <td>Email</td>
-                        <td>Tanggal Lahir</td>
-                        <td>Gender</td>
                         <td>Action</td>
                     </tr>
                     </thead>
@@ -57,8 +55,6 @@
                         <td th:text="${u.username}"></td>
                         <td th:text="${u.namaUser}"></td>
                         <td th:text="${u.email}"></td>
-                        <td th:text="${u.tanggalLahir}"></td>
-                        <td th:text="${u.gender}"></td>
                         <td>
                             <a class="btn btn-primary text-white eBtn"
                                th:href="@{http://localhost:8082/finduser/(userId=${u.userId})}">Edit</a>
@@ -98,15 +94,25 @@
                                     <!--                                    th:text="#{${'selected.label.' + country.name}}"/>-->
                                     <!--                        </select>-->
 
+                                    <label>Nama Role<span class="redColor">*</span></label>
                                     <select th:field="*{roleId}" class="form-control" required>
                                         <option value="">Pilih</option>
                                         <option
-                                                th:each="ro : ${roler}"
-                                                th:value="${ro.roleId}"
-                                                th:text="${ro.namaRole}"
-                                                >
+                                                th:each="role : ${roler}"
+                                                th:value="${role.roleId}"
+                                                th:text="${role.namaRole}">
                                         </option>
                                     </select>
+
+<!--                                    <select th:field="*{roleId}" class="form-control" required>-->
+<!--                                        <option value="">Pilih</option>-->
+<!--                                        <option-->
+<!--                                                th:each="ro : ${roler}"-->
+<!--                                                th:value="${ro.roleId}"-->
+<!--                                                th:text="${ro.namaRole}"-->
+<!--                                                >-->
+<!--                                        </option>-->
+<!--                                    </select>-->
 
                                     <div class="form-group">
                                         <label for="username" class=" label">Username</label>
@@ -120,14 +126,7 @@
                                         <label for="email" class=" label">Email</label>
                                         <input type="text" class="form-control" id="email" name="email" value="" th:field="*{email}">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="tanggalLahir" class=" label">Tanggal Lahir</label>
-                                        <input type="text" class="form-control" id="tanggalLahir" name="tanggalLahir" value="" th:field="*{tanggalLahir}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="gender" class=" label">Gender</label>
-                                        <input type="text" class="form-control" id="gender" name="gender" value="" th:field="*{gender}">
-                                    </div>
+
 
                                 </div>
                                 <div class="modal-footer">

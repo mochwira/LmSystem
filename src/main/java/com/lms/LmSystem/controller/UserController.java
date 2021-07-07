@@ -95,5 +95,4 @@ public class UserController {
         this.userService.save(user);
         return "redirect:/user";
     }
-
 }

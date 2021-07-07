@@ -55,7 +55,5 @@ public class UserDetailServiceCustome implements UserDetailsService{
         //cek pemanggilan ini mungkin pakai emailS
         return new NewUserDetail(emails, password, role);
    }
-    
-    
-    
+
 }

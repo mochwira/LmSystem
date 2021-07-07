@@ -46,7 +46,15 @@
             <a th:href="@{/file}">Report</a>
           </li>
           <li>
-            <a href="#">Status</a>
+            <a th:href="@{/artikel}">Artikel</a>
+          </li>
+
+          <li>
+            <a th:href="@{/approval}">Approval Status</a>
+          </li>
+
+          <li>
+            <a th:href="@{/artikelapproval}">Artikel Approval</a>
           </li>
         </ul>
 
@@ -55,7 +63,7 @@
             <a href="" class="help">Help</a>
           </li>
           <li>
-            <a href="" class="setting">Settings</a>
+            <a th:href="@{/logout}" class="setting">Log Out</a>
           </li>
         </ul>
       </nav>

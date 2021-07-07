@@ -37,10 +37,7 @@
 //        u.setUsername(ump.getUsername());
 //        u.setNamaUser(ump.getNamaUser());
 //        u.setEmail(ump.getEmail());
-//        u.setPasswords(ump.getPasswords());
-//        u.setTanggalLahir(ump.getTanggalLahir());
-//        u.setGender(ump.getGender());
-//        u.setFotoProfil(ump.getFotoProfil());
+//
 //
 //        return u;
 //    }

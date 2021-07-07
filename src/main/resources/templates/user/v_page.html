@@ -255,8 +255,8 @@
             </form>
             <!--END FORM EDIT-->
 
-            <!--                    Start Form Remove -->
-                    <form id="edit-row-form" th:action="@{/user/edit}" th:object="${removeUser}" method="POST">
+            <!--Start Form Remove -->
+                    <form id="edit-row-form" th:action="@{/user/remove}" th:object="${removeUser}" method="POST">
                         <div class="modal fade" id="removeUser" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -316,7 +316,7 @@
 
                     <!--                    End Remove Form-->
 
-<!--            <form th:insert="transportasi/v_page_remove.html :: form" id="remove-row-form" th:action="@{/transportasi/edit}" th:object="${removeTransportasi}" method="POST"></form>-->
+<!--            <form th:insert="user/v_page_remove.html :: form" id="remove-row-form" th:action="@{/transportasi/edit}" th:object="${removeTransportasi}" method="POST"></form>-->
 
 <!--            <footer th:insert="fragment/footer.html :: footer"></footer>-->
 

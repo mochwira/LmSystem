@@ -47,7 +47,7 @@ public class UserFileService implements UserFile {
             cell.setCellValue("Password");
             cell.setCellStyle(headerCellStyle);
 
-            cell = row.createCell(3);
+            cell = row.createCell(4);
             cell.setCellValue("Role");
             cell.setCellStyle(headerCellStyle);
 

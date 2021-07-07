@@ -6,7 +6,6 @@
 package com.lms.LmSystem.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,8 +18,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -33,7 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "ArtikelApproval.findAll", query = "SELECT a FROM ArtikelApproval a"),
     @NamedQuery(name = "ArtikelApproval.findByArtikelApprovalId", query = "SELECT a FROM ArtikelApproval a WHERE a.artikelApprovalId = :artikelApprovalId"),
-    @NamedQuery(name = "ArtikelApproval.findByTanggalApproval", query = "SELECT a FROM ArtikelApproval a WHERE a.tanggalApproval = :tanggalApproval")})
+    @NamedQuery(name = "ArtikelApproval.findByKeteranganApproval", query = "SELECT a FROM ArtikelApproval a WHERE a.keteranganApproval = :keteranganApproval")})
 public class ArtikelApproval implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,10 +39,8 @@ public class ArtikelApproval implements Serializable {
     @Basic(optional = false)
     @Column(name = "artikel_approval_id")
     private Integer artikelApprovalId;
-    @Basic(optional = false)
-    @Column(name = "tanggal_approval")
-    @Temporal(TemporalType.DATE)
-    private Date tanggalApproval;
+    @Column(name = "keterangan_approval")
+    private String keteranganApproval;
     @JoinColumn(name = "artikel_id", referencedColumnName = "artikel_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Artikel artikelId;
@@ -60,11 +55,6 @@ public class ArtikelApproval implements Serializable {
         this.artikelApprovalId = artikelApprovalId;
     }
 
-    public ArtikelApproval(Integer artikelApprovalId, Date tanggalApproval) {
-        this.artikelApprovalId = artikelApprovalId;
-        this.tanggalApproval = tanggalApproval;
-    }
-
     public Integer getArtikelApprovalId() {
         return artikelApprovalId;
     }
@@ -73,12 +63,12 @@ public class ArtikelApproval implements Serializable {
         this.artikelApprovalId = artikelApprovalId;
     }
 
-    public Date getTanggalApproval() {
-        return tanggalApproval;
+    public String getKeteranganApproval() {
+        return keteranganApproval;
     }
 
-    public void setTanggalApproval(Date tanggalApproval) {
-        this.tanggalApproval = tanggalApproval;
+    public void setKeteranganApproval(String keteranganApproval) {
+        this.keteranganApproval = keteranganApproval;
     }
 
     public Artikel getArtikelId() {

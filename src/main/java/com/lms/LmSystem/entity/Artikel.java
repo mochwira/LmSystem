@@ -6,7 +6,6 @@
 package com.lms.LmSystem.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -23,8 +22,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -39,8 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Artikel.findAll", query = "SELECT a FROM Artikel a"),
     @NamedQuery(name = "Artikel.findByArtikelId", query = "SELECT a FROM Artikel a WHERE a.artikelId = :artikelId"),
     @NamedQuery(name = "Artikel.findByNamaArtikel", query = "SELECT a FROM Artikel a WHERE a.namaArtikel = :namaArtikel"),
-    @NamedQuery(name = "Artikel.findByDeskripsiArtkel", query = "SELECT a FROM Artikel a WHERE a.deskripsiArtkel = :deskripsiArtkel"),
-    @NamedQuery(name = "Artikel.findByLastUpdate", query = "SELECT a FROM Artikel a WHERE a.lastUpdate = :lastUpdate")})
+    @NamedQuery(name = "Artikel.findByDeskripsiArtikel", query = "SELECT a FROM Artikel a WHERE a.deskripsiArtikel = :deskripsiArtikel"),
+    @NamedQuery(name = "Artikel.findBySumberArtikel", query = "SELECT a FROM Artikel a WHERE a.sumberArtikel = :sumberArtikel")})
 public class Artikel implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,16 +50,14 @@ public class Artikel implements Serializable {
     @Column(name = "nama_artikel")
     private String namaArtikel;
     @Basic(optional = false)
-    @Column(name = "deskripsi_artkel")
-    private String deskripsiArtkel;
+    @Column(name = "deskripsi_artikel")
+    private String deskripsiArtikel;
     @Basic(optional = false)
     @Lob
-    @Column(name = "gambar_artikel")
-    private byte[] gambarArtikel;
-    @Basic(optional = false)
-    @Column(name = "last_update")
-    @Temporal(TemporalType.DATE)
-    private Date lastUpdate;
+    @Column(name = "body_artikel")
+    private String bodyArtikel;
+    @Column(name = "sumber_artikel")
+    private String sumberArtikel;
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User userId;
@@ -70,25 +65,21 @@ public class Artikel implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Kategori kategoriId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "artikelId", fetch = FetchType.LAZY)
-    private List<Sumber> sumberList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "artikelId", fetch = FetchType.LAZY)
     private List<ArtikelApproval> artikelApprovalList;
 
-    public Artikel(Integer artikelId, Object kategoriIdObject, String namaArtikel, String deskripsiArtikel, Date lastUpdate) {
+    public Artikel() {
     }
 
-    public Artikel() {
+    public Artikel(Integer artikelId) {
         this.artikelId = artikelId;
     }
 
-    public Artikel(Object namaArtikel, String deskripsiArtkel, String gambarArtikel, String lastUpdate) {
+    public Artikel(Integer artikelId, String namaArtikel, String deskripsiArtikel, String bodyArtikel) {
         this.artikelId = artikelId;
         this.namaArtikel = namaArtikel;
-        this.deskripsiArtkel = deskripsiArtkel;
-        this.gambarArtikel = gambarArtikel;
-        this.lastUpdate = lastUpdate;
+        this.deskripsiArtikel = deskripsiArtikel;
+        this.bodyArtikel = bodyArtikel;
     }
-
 
     public Integer getArtikelId() {
         return artikelId;
@@ -106,28 +97,28 @@ public class Artikel implements Serializable {
         this.namaArtikel = namaArtikel;
     }
 
-    public String getDeskripsiArtkel() {
-        return deskripsiArtkel;
+    public String getDeskripsiArtikel() {
+        return deskripsiArtikel;
     }
 
-    public void setDeskripsiArtkel(String deskripsiArtkel) {
-        this.deskripsiArtkel = deskripsiArtkel;
+    public void setDeskripsiArtikel(String deskripsiArtikel) {
+        this.deskripsiArtikel = deskripsiArtikel;
     }
 
-    public byte[] getGambarArtikel() {
-        return gambarArtikel;
+    public String getBodyArtikel() {
+        return bodyArtikel;
     }
 
-    public void setGambarArtikel(byte[] gambarArtikel) {
-        this.gambarArtikel = gambarArtikel;
+    public void setBodyArtikel(String bodyArtikel) {
+        this.bodyArtikel = bodyArtikel;
     }
 
-    public Date getLastUpdate() {
-        return lastUpdate;
+    public String getSumberArtikel() {
+        return sumberArtikel;
     }
 
-    public void setLastUpdate(Date lastUpdate) {
-        this.lastUpdate = lastUpdate;
+    public void setSumberArtikel(String sumberArtikel) {
+        this.sumberArtikel = sumberArtikel;
     }
 
     public User getUserId() {
@@ -142,17 +133,8 @@ public class Artikel implements Serializable {
         return kategoriId;
     }
 
-    public void setKategoriId(String kategoriId) {
+    public void setKategoriId(Kategori kategoriId) {
         this.kategoriId = kategoriId;
-    }
-
-    @XmlTransient
-    public List<Sumber> getSumberList() {
-        return sumberList;
-    }
-
-    public void setSumberList(List<Sumber> sumberList) {
-        this.sumberList = sumberList;
     }
 
     @XmlTransient

@@ -8,6 +8,7 @@ package com.lms.LmSystem.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,43 +17,22 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean;
 
 /**
  *
  * @author mocha
  */
 @Configuration
-@EnableWebSecurity
-@EnableGlobalAuthentication
-public class SpringMailConfiguration extends WebSecurityConfigurerAdapter {
-    
-    @Autowired
-    UserDetailsService userDetailsService;
+public class SpringMailConfiguration {
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override //mengatur map kemana
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("role").hasRole("admin")
-                //.antMatchers("/role").hasRole("admin")
-                .antMatchers("home/").hasRole("user")
-                .antMatchers("/").permitAll()
-                .antMatchers("/password/forgot").permitAll()
-                .antMatchers("/password/forgot/request").permitAll()
-                .and()
-                .formLogin()
-//                .loginPage("/loginpage")
-//                .successHandler(csh)
-//                .usernameParameter("email").passwordParameter("password")
-                ;
-    }
+    @Primary
     @Bean
-    public PasswordEncoder getPasswordEncoder(){
-        return NoOpPasswordEncoder.getInstance();
+
+    public FreeMarkerConfigurationFactoryBean factoryBean(){
+        FreeMarkerConfigurationFactoryBean bean = new FreeMarkerConfigurationFactoryBean();
+        bean.setTemplateLoaderPaths("classpath:/templates/mail");
+        return bean;
     }
 
 }
