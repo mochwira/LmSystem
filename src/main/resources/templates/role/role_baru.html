@@ -101,7 +101,14 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" onclick="Swal.fire('Hellow World', 'Latihan SweetAlert', 'success')">Save</button>
+                    <button type="submit" class="btn btn-primary" onclick="
+                    Swal.fire({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Role has been saved',
+                    showConfirmButton: false,
+                    timer: 13500
+                    })">Save</button>
                   </div>
                 </div>
               </div>

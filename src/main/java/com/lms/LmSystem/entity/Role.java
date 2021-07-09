@@ -19,6 +19,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -44,6 +46,8 @@ public class Role implements Serializable {
     private Integer roleId;
     @Basic(optional = false)
     @Column(name = "nama_role")
+    @NotNull
+    @Size (min = 1, message = "Nama Role Tidak Boleh Kosong")
     private String namaRole;
     @Basic(optional = false)
     @Column(name = "status_role")

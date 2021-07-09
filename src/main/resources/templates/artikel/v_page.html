@@ -23,6 +23,12 @@
 
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
 
+    <script>
+            $(document).ready( function () {
+            $('#artikeltable').DataTable();
+            } );
+        </script>
+
     <script src="js/sweetalert2.all.min.js"></script>
     <link rel="icon" th:href="@{/img/menu.png}"/>
     <link rel="stylesheet" th:href="@{/css/stylesidebar.css}"/>
@@ -144,12 +150,12 @@
                             <div class="modal-body">
                                 <div class="form-group">
 
-                                    </br>
-                                    <label>Artikel Id<span class="redColor">*</span></label>
-                                    <div class="form-line">
-                                        <input type="text" th:field="*{artikelId}" class="form-control" placeholder="" required>
-                                    </div>
-                                    </br>
+<!--                                    </br>-->
+<!--                                    <label>Artikel Id<span class="redColor">*</span></label>-->
+<!--                                    <div class="form-line">-->
+<!--                                        <input type="text" th:field="*{artikelId}" class="form-control" placeholder="" required>-->
+<!--                                    </div>-->
+<!--                                    </br>-->
 
                                     </br>
                                     <label>Nama Katgeori<span class="redColor">*</span></label>
@@ -373,11 +379,7 @@
 <!--        <div th:insert="fragment/foot.html :: foot"></div>-->
         <script src="js/artikel.js"></script>
         <!--        <script src="js/helper/provinsi.js"></script>-->
-        <script>
-            $(document).ready( function () {
-            $('#artikeltable').DataTable();
-            } );
-        </script>
+
 
     </body>
 

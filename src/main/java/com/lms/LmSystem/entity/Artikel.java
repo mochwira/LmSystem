@@ -22,6 +22,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -48,6 +50,8 @@ public class Artikel implements Serializable {
     private Integer artikelId;
     @Basic(optional = false)
     @Column(name = "nama_artikel")
+    @NotNull
+    @Size (min = 2, max = 100, message = "Nama Harus Disini")
     private String namaArtikel;
     @Basic(optional = false)
     @Column(name = "deskripsi_artikel")

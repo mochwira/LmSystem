@@ -21,6 +21,12 @@
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <script>
+            $(document).ready( function () {
+            $('#usertable').DataTable();
+            } );
+        </script>
+
     <link rel="stylesheet" th:href="@{/css/stylesidebar.css}"/>
     </head>
 
@@ -60,7 +66,9 @@
                 <section class="content">
                     <div class="container-fluid">
                         <div class="body">
+
                             <div class="table-responsive">
+<!--                                -->
                                 <table class="table table-bordered table-striped table-hover js-basic-example display" id="usertable">
                                     <thead>
                                         <tr>
@@ -135,13 +143,6 @@
                                 <div class="form-group">
 
                                     </br>
-                                    <label>User Id<span class="redColor">*</span></label>
-                                    <div class="form-line">
-                                        <input type="text" th:field="*{userId}" class="form-control" placeholder="" required>
-                                    </div>
-                                    </br>
-
-                                    </br>
                                     <label>Nama Role<span class="redColor">*</span></label>
                                     <select th:field="*{roleId}" class="form-control" required>
                                         <option value="">Pilih</option>
@@ -161,9 +162,10 @@
                                     </br>
 
                                     </br>
-                                    <label>Nama User<span class="redColor">*</span></label>
+                                    <label th:for="namaUser">Nama User<span class="redColor">*</span></label>
                                     <div class="form-line">
                                         <input type="text" th:field="*{namaUser}" class="form-control" placeholder="" required>
+                                        <span th:errors="*{namaUser}" class="error"></span>
                                     </div>
                                     </br>
 
@@ -327,11 +329,7 @@
 
 <!--        <div th:insert="fragment/foot.html :: foot"></div>-->
         <script src="js/user.js"></script>
-        <script>
-            $(document).ready( function () {
-            $('#usertable').DataTable();
-            } );
-        </script>
+
         <!--        <script src="js/helper/provinsi.js"></script>-->
 
     </body>

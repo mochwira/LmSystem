@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.validation.Valid;
 
 @Controller
 public class KategoriMappingController {
@@ -21,12 +24,17 @@ public class KategoriMappingController {
         //model.addAttribute("kategoris", kategoriRepositoryJpa.findAll(new PageRequest(page, 4)));
         model.addAttribute("kategoris", kategoriRepositoryJpa.findAll(PageRequest.of(page, 8)));
         model.addAttribute("buatPageKategori", page);
-        model.addAttribute("buatKategori", new Kategori());
+        model.addAttribute ( "buatKategori", new Kategori());
         return "/kategori/kategori.html";
     }
 
     @PostMapping("/save")
-    public String save(Kategori kategori) {
+    //@Valid BindingResult bindingResult
+    public String save( Kategori kategori) {
+//        if(bindingResult.hasErrors()){
+//            return "redirect:/kategori";
+//        }
+
         kategoriRepositoryJpa.save(kategori);
 
         return "redirect:/kategori";

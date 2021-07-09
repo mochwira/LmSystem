@@ -7,11 +7,13 @@ import com.lms.LmSystem.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.util.Date;
 
 @Controller
@@ -25,7 +27,8 @@ public class UserController {
     RoleService roleService;
 
     @GetMapping("/user")
-    public String getUser(Model model) {
+    //@Valid Errors errors,
+    public String getUser( Model model) {
         Iterable<User> user = userService.getAll();
         model.addAttribute("users", user);
         Iterable<Role> role = roleService.getAll();
@@ -35,6 +38,11 @@ public class UserController {
             System.out.println(rol.getRoleId());
             System.out.println(rol.getNamaRole());
         }
+
+//        if (errors.hasErrors()){
+//            model.addAttribute("title","Add User");
+//            return "/user/add";
+//        }
 
         User userCrud = new User();
         model.addAttribute("addUser", userCrud);
@@ -54,6 +62,7 @@ public class UserController {
             @RequestParam(value = "namaUser", required = false) String namaUser,
             @RequestParam(value = "email", required = false) String email,
             @RequestParam(value = "password", required = false) String password
+
     ) {
 
         Object idRoleObject = new Role(roleId);
