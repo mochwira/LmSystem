@@ -8,13 +8,13 @@ $(document).ready(function(){
         if(text == 'Edit') {
             $.getJSON(href, function(response){
             //$('.myForm #kategoriId').val(response.kategoriId).hide(); ini aslinya
-                $('.myForm #kategoriId').val(response.kategoriId);
+                $('.myForm #kategoriId').val(response.kategoriId).hide();
                 $('.myForm #namaKategori').val(response.namaKategori);
             });
             $('.myForm #exampleModal').modal();
         } else {
 //         $('.myForm #kategoriId').val('0').hide(); ini aslinya
-            $('.myForm #kategoriId').val('0');
+            $('.myForm #kategoriId').val('0').hide();
 
             $('.myForm #namaKategori').val('');
             $('.myForm #exampleModal').modal();

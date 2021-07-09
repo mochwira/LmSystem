@@ -30,37 +30,30 @@ public class PasswordController {
     @Autowired
     private UserService userService;
     @Autowired
-    private SpringMailService springMailService; 
-    
-    //    @GetMapping("/password")
-//    public String getPassword(Model model) {
-//        
-//        System.out.println("ini password forgot");
-//        return "password/v_page_forgot.html";
-//    
+    private SpringMailService springMailService;
+
 
     @GetMapping("/password/forgot")
-    public String getforgotPassword() {
+    public String forgotPassword() {
 
         return "password/forgot.html";
     }
 
     @GetMapping("/password/reset")
-    public String getresetPassword() {
+    public String resetPassword() {
 
         return "password/resetpassword.html";
     }
 
     @PostMapping("/password/forgot/request")
-    public String setrequestForgotPassword(
+    public String requestForgotPassword(
             @RequestParam (value = "email", required = true) String email){
         {
-            System.out.println(email);
             User getUser = userService.getEmail(email);
             String sender = getUser.getNamaUser();
-            
 
-            String key = UUID.randomUUID().toString();//generate key
+            //BISA ENCRYPT PAKAI IF ELSE
+            String key = UUID.randomUUID().toString();
 
             String subject = "Password Reset";
             String content = "Use Code: " + key + ", or click on button bellow";
@@ -71,11 +64,11 @@ public class PasswordController {
             Map<String, Object> model = new HashMap<>();
             model.put("title", subject);
             model.put("name", sender);
-            model.put("messege", content);
-            model.put("url", link);
+            model.put("message", content);
+            model.put("tiketID", link);
 
             springMailService.sendMail(model, subject, email);
-            return "redirect:/password/forgot";
+            return "redirect:/password/reset";
         }
     }
 }

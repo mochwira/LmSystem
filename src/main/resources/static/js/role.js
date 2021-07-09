@@ -8,14 +8,14 @@ $(document).ready(function(){
         if(text == 'Edit') {
             $.getJSON(href, function(response){
             //$('.myForm #kategoriId').val(response.kategoriId).hide(); ini aslinya
-                $('.myForm #roleId').val(response.roleId);
+                $('.myForm #roleId').val(response.roleId).hide();
                 $('.myForm #namaRole').val(response.namaRole);
                 $('.myForm #statusRole').val(response.statusRole);
             });
             $('.myForm #roleModal').modal();
         } else {
 //         $('.myForm #kategoriId').val('0').hide(); ini aslinya
-            $('.myForm #roleId').val('0');
+            $('.myForm #roleId').val('0').hide();
 
             $('.myForm #namaRole').val('');
             $('.myForm #statusRole').val('');
