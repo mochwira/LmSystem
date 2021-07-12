@@ -210,7 +210,7 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label>User Id<span class="redColor">*</span></label>
-                                    <div class="form-line">                        
+                                    <div class="form-line" hidden>
                                         <input type="text" th:field="*{userId}" class="userIdEdit form-control" placeholder="" required>
                                     </div>
 
@@ -258,7 +258,7 @@
             <!--END FORM EDIT-->
 
             <!--Start Form Remove -->
-                    <form id="edit-row-form" th:action="@{/user/remove}" th:object="${removeUser}" method="POST">
+                    <form id="edit-row-form" th:action="@{/user/edit}" th:object="${removeUser}" method="POST">
                         <div class="modal fade" id="removeUser" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -269,14 +269,14 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="form-group">
-                                            <label>User Id<span class="redColor">*</span></label>
-                                            <div class="form-line">
+                                            <label hidden>User Id<span class="redColor">*</span></label>
+                                            <div class="form-line" hidden>
                                                 <input type="text" th:field="*{userId}" class="userIdRemove form-control" placeholder="" required>
                                             </div>
 
-                                            <label>Nama Role<span class="redColor">*</span></label>
+                                            <label hidden>Nama Role<span class="redColor">*</span></label>
                                             <select th:field="*{roleId}" class="roleIdRemove form-control" required>
-                                                <option value hidden="">Pilih</option>
+                                                <option hidden value ="">Pilih</option>
                                                 <option
                                                         th:each="role : ${roler}"
                                                         th:value="${role.roleId}"

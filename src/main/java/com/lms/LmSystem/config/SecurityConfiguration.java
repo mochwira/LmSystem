@@ -16,10 +16,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean;
+
+import javax.sql.DataSource;
 
 /**
  *
@@ -30,9 +34,37 @@ import org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean;
 @EnableGlobalAuthentication
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+//    @Autowired
+//    DataSource dataSource;
+
+    // TAMBAHI CUSTOM SUCCESS HANDLER
+//    @Autowired
+//    SecurityCustomSuccessHandler customSuccessHandler;
+
     @Autowired
     UserDetailsService userDetailsService;
 
+//    @Bean
+//    public PasswordEncoder passwordEncoder(){
+//        return new BCryptPasswordEncoder();
+//    }
+
+//    @Bean
+//    public JdbcUserDetailsManager jdbcUserDetailsManager() throws Exception{
+//        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();
+//        jdbcUserDetailsManager.setDataSource(dataSource);
+//        return jdbcUserDetailsManager;
+//    }
+//
+//    //ini baru
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(userDetailsService)
+//                .passwordEncoder(passwordEncoder());
+//    }
+
+
+    //ini lama
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService); //To change body of generated methods, choose Tools | Templates.
@@ -41,25 +73,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override //mengatur map kemana
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-//                .antMatchers("user").hasRole("admin")
-//                //.antMatchers("/role").hasRole("admin")
-//                .antMatchers("home/").hasRole("user")
-//                .antMatchers("/").permitAll()
-//                .antMatchers("/password/forgot").permitAll()
-//                .antMatchers("/password/forgot/request").permitAll()
-//                .and()
-//                .formLogin()
-//                .loginPage("/loginpage")
-//                .successHandler(csh)
-//                .usernameParameter("email").passwordParameter("password")
 
                 .antMatchers("/artikel/").hasRole("admin")
                 //.antMatchers("/artikel/").hasAnyRole("admin", "employee", "publisher")
                 .antMatchers("/user/").hasRole("admin")
                 .antMatchers("/role/").hasRole("admin")
                 .antMatchers("/kategori/").hasRole("admin")
-                .antMatchers("/user/").hasRole("admin")
                 .antMatchers("/home/").hasRole("employee")
+                .antMatchers("/artikel/").hasRole("employee")
+                .antMatchers("/file/").hasRole("employee")
                 .antMatchers("/approval/").hasRole("publisher")
                 .antMatchers("/file/").hasRole("publisher")
                 //.antMatchers("/").permitAll()
@@ -86,9 +108,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/artikel");
         ;
     }
+
+    //ini bean default
     @Bean
     public PasswordEncoder getPasswordEncoder(){
+
         return NoOpPasswordEncoder.getInstance();
     }
+
+
+
 
 }
